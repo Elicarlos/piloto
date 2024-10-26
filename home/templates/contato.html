@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Principal</title>
+</head>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 80%;
+        margin:0 auto
+    }
+    header {
+        width: 100%;
+        margin: 0 auto;
+        height: 3rem;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+        margin-bottom: 5rem;   
+        display: flex;
+        align-items: center;
+        justify-content: end;  
+        
+    }
+
+    header nav ul {
+        display: flex;
+       
+     
+        justify-content: end;
+       
+   
+ 
+        margin: 0 auto;
+        gap: 5rem;
+        font-size: 1.5rem;
+      
+    }
+
+    header nav ul li:hover {
+        border-bottom: 3px  solid tomato;
+        transform: translateY(-1px);
+        
+
+    }
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+    li {
+        list-style: none;
+       
+    }
+
+    .container > h1 {
+        text-align: center;
+    }
+</style>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'home' %}">
+                        Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'sobre' %}">
+                            Sobre
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contato' %}">
+                            Contato
+                        </a>
+                    </li>
+    
+                    <li>
+                        <a href="{% url 'ajuda' %}">
+                            Ajuda
+                        </a>
+                    </li>
+                  
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+   <div class="container">
+    <h1>Contato</h1>
+   </div>
+    
+    
+</body>
+</html>
