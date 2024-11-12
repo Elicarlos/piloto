@@ -1,0 +1,26 @@
+{% extends 'base_dash.html'%}
+{% block title %}Lista de Produtos{% endblock %}
+{% block cards %}{% endblock %}
+{%  block titulo_page %}Lista de Produtos{% endblock %}
+{% block conteudo %}
+<table class="table table-bordered table-hover mx-auto">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Valor (R$)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for produto in produtos %}
+        <tr>
+            <td>{{ produto.id }}</td>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.preco }}</td>
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
+
+{% endblock %}

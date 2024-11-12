@@ -158,11 +158,29 @@
                     </ul>
                 </div>
             </div>
-        </nav>
-
-        {% block content %}
-        <!-- Dashboard Content -->      
-        {% endblock %}
+        </nav>                
+        <!-- Dashboard Content -->
+        <div class="mt-4" style=" display: flex; flex-direction: column; gap: 20px;">
+            {% block cards %}           
+            {% endblock %}
+               
+           <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class=" card-custom">
+                        <div class="card-header card-header-custom">
+                            <h5>{% block titulo_page %}
+                            New Orders
+                            {% endblock %}</h5>
+                        </div>
+                        <div class="card-body card-body-custom">
+                            {% block conteudo %}                           
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <!-- Additional content like charts, tables, etc. can be added here -->
+        </div>         
     </div>
     
 
