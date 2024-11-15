@@ -1,0 +1,18 @@
+{% extends 'base_dash.html'%}
+{% block title %}Produto{% endblock %}
+{%  block titulo_page %}Produto{% endblock %}
+{% block cards %}
+<div>
+    <button onclick="location.href='{% url 'produtos' %}'" class="btn btn-primary">Voltar</button>
+</div>
+   
+{% endblock %}
+{% block conteudo %}
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <button class="btn btn-primary">Salvar</button>
+
+    </form>
+{% endblock %}

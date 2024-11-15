@@ -1,6 +1,11 @@
 {% extends 'base_dash.html'%}
 {% block title %}Lista de Produtos{% endblock %}
-{% block cards %}{% endblock %}
+{% block cards %}
+<div>
+    <button onclick="location.href='{% url 'adiciona_produto' %}'" class="btn btn-primary">Adicionar</button>
+</div>
+   
+{% endblock %}
 {%  block titulo_page %}Lista de Produtos{% endblock %}
 {% block conteudo %}
 <table class="table table-bordered table-hover mx-auto">
