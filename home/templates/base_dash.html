@@ -201,7 +201,7 @@
         document.querySelectorAll('.nav-item').forEach(function (item) {
         const submenu = item.querySelector('.submenu');
 
-        if (submenu) {                
+        if (submenu) {                      
                 item.querySelector('.nav-link').addEventListener('click', function (e) {
                     e.preventDefault();                     
                     if (sidebar.classList.contains('active')) {
@@ -213,6 +213,7 @@
                         }
                     });                   
                     item.classList.toggle('open');
+                    console.log('Estou no submenu')   
                 });
             }
         });
