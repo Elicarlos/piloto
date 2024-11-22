@@ -1,6 +1,8 @@
-from django.http import HttpResponseBadRequest
-from django.shortcuts import render
+from django.http import HttpResponseBadRequest, Http404
+from django.shortcuts import render, redirect
 from . forms import ContatoForm, ProdutoForm
+from . models import Produto
+
 
 # Create your views here.
 def index(request):
@@ -56,27 +58,66 @@ def exibir_item(request, id):
     return render(request, 'home/exibir_item.html', {"id": id})
 
 def lista_produtos(request):
+    produtos = Produto.objects.all()
     context = {
-        'produtos': [
-            {'id': 1, 'nome': 'Camisa Polo', 'preco': 250.00},
-            {'id': 2, 'nome': 'Calça Jeans', 'preco': 180.00},
-            {'id': 3, 'nome': 'Tênis Esportivo', 'preco': 320.00},
-            {'id': 4, 'nome': 'Jaqueta de Couro', 'preco': 450.00},
-            {'id': 5, 'nome': 'Relógio Digital', 'preco': 120.00},
-            {'id': 6, 'nome': 'Óculos de Sol', 'preco': 200.00},
-            {'id': 7, 'nome': 'Boné', 'preco': 80.00},
-            {'id': 8, 'nome': 'Mochila', 'preco': 150.00},
-            {'id': 9, 'nome': 'Cinto de Couro', 'preco': 90.00},
-            {'id': 10, 'nome': 'Carteira de Couro', 'preco': 110.00}
-        ],
+        # 'produtos': [
+        #     {'id': 1, 'nome': 'Camisa Polo', 'preco': 250.00},
+        #     {'id': 2, 'nome': 'Calça Jeans', 'preco': 180.00},
+        #     {'id': 3, 'nome': 'Tênis Esportivo', 'preco': 320.00},
+        #     {'id': 4, 'nome': 'Jaqueta de Couro', 'preco': 450.00},
+        #     {'id': 5, 'nome': 'Relógio Digital', 'preco': 120.00},
+        #     {'id': 6, 'nome': 'Óculos de Sol', 'preco': 200.00},
+        #     {'id': 7, 'nome': 'Boné', 'preco': 80.00},
+        #     {'id': 8, 'nome': 'Mochila', 'preco': 150.00},
+        #     {'id': 9, 'nome': 'Cinto de Couro', 'preco': 90.00},
+        #     {'id': 10, 'nome': 'Carteira de Couro', 'preco': 110.00}
+        # ],
+        'produtos': produtos 
     }
 
     return render(request, 'produtos/lista-produtos.html', context)
 
-def adiciona_produto(request):
-    form = ProdutoForm()
-    contexto = {
+def adiciona_produto(request):   
+    if request.method == "POST":
+        form = ProdutoForm(request.POST)
+        if form.is_valid():
+            form.save()            
+            redirect('produtos')            
+    else:
+        form = ProdutoForm()
+    
+    return render(request, 'produtos/produto-form.html', {'form': form})
+
+
+def detalhes_produto(request, id):
+    try:
+        produto = Produto.objects.get(pk=id)    
+    except Produto.DoesNotExist:
+        raise Http404('Produto não existe')
+    return render(request, 'produtos/detalhe-produto.html', {'produto': produto})
+
+    
+def editar_produto(request, id):
+    produto = Produto.objects.get(id=id)
+    form  = ProdutoForm(instance=produto)
+    
+    if request.method == "POST":
+        form = ProdutoForm(request.POST, instance=produto)
+        if form.is_valid():
+            form.save()
+            return redirect('produtos')
+    context ={
         'form': form
     }
     
-    return render(request, 'produtos/produto-form.html', contexto)
+    return render(request, 'produtos/editar-produto.html', context)
+
+
+def excluir_produto(request, id):
+    produto = Produto.objects.get(id=id)    
+    
+    if request.method == "GET":
+        produto.delete()
+        return redirect('produtos')
+    
+    # return render(request,'produtos/delete-produto.html', {'produto': produto})

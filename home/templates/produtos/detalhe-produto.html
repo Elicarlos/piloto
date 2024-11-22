@@ -1,0 +1,16 @@
+{% extends 'base_dash.html'%}
+{% block title %}Detalhes do Produto{% endblock %}
+{% block cards %}
+<div>
+    <button onclick="location.href='{% url 'home' %}'" class="btn btn-primary"><</button>
+</div>
+   
+{% endblock %}
+{%  block titulo_page %}Detalhes do Produto{% endblock %}
+{% block conteudo %}
+
+    <p>{{ produto.nome }} - {{ produto.preco }}</p>
+
+
+
+{% endblock %}

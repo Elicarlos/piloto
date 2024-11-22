@@ -1,4 +1,5 @@
 from django import forms
+from . models import Produto
 
 class ContatoForm(forms.Form):
     nome = forms.CharField(
@@ -19,7 +20,7 @@ class ContatoForm(forms.Form):
     )
     
     
-class ProdutoForm(forms.Form):
+class ProdutoForm(forms.ModelForm):
     nome = forms.CharField(
         label="Nome",
         max_length=250,
@@ -30,3 +31,7 @@ class ProdutoForm(forms.Form):
         max_digits=10,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Preço'})
     )
+    
+    class Meta:
+        model = Produto
+        fields = '__all__'

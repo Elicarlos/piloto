@@ -13,7 +13,9 @@
         <tr>
             <th scope="col">Código</th>
             <th scope="col">Descrição</th>
+            <th scope="col">Estoque</th>
             <th scope="col">Valor (R$)</th>
+            <th scope="col">Açoes</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +24,12 @@
             <td>{{ produto.id }}</td>
             <td>{{ produto.nome }}</td>
             <td>{{ produto.preco }}</td>
+            <td>10</td>
+            <td style="width: 280px;">
+                <button onclick="location.href='{% url 'detalhes_produto' produto.id %}'" class="btn btn-info">Detalhes</button>
+                <button onclick="location.href='{% url 'editar_produto' produto.id %}'" class="btn btn-warning">Alterar</button>
+                <button onclick="location.href='{% url 'excluir_produto' produto.id %}'" class="btn btn-danger">Excluir</button>
+            </td>
         </tr>
         {% endfor %}
         
